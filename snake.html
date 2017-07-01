@@ -1,10 +1,9 @@
 
-    <canvas id="gc"></canvas>
+<canvas id="gc"></canvas>
 
 <script>
-
-    screenHeight = 400;
-    screenWidth = 400;
+    screenHeight = 600;
+    screenWidth = 600;
     matrixSize = 16
     polygon = screenHeight / matrixSize
     canv=document.getElementById("gc");
@@ -15,7 +14,6 @@
     xSnake = polygon * (matrixSize / 2)
     ySnake = screenHeight - (polygon * 3)
     snake = []
-    direction = 'left';
     applePositionX = 0;
     applePositionY = 0;
     x = -polygon;
@@ -68,46 +66,6 @@
         }
 
         detectColision()
-
-        /*
-        if ( ((first.x / matrixSize) == (applePositionX / matrixSize)) &&
-          ((first.y / matrixSize) == (applePositionY / matrixSize))
-        ) {
-          applePositionX = Math.floor(Math.random() * (matrixSize - 1)) + 0
-          applePositionY = Math.floor(Math.random() * (matrixSize - 1)) + 0
-          applePositionX = applePositionX * polygon
-          applePositionY = applePositionY * polygon
-        } else {
-        }
-        */
-
-        //console.log("y: " + ((first.y / matrixSize) == (applePositionY / matrixSize)))
-
-
-
-        /*
-        else
-        if (last.x > screenWidth && direction == "right") {
-            for (i=0; i<snake.length; i++) {
-                snake[i].x = (-i) * polygon
-            }
-            xSnake = first.x
-        } else
-        if (last.y < 0 && direction == "up") {
-          for (i=0; i<snake.length; i++) {
-              snake[i].y = (15 + i) * polygon
-          }
-          ySnake = first.y
-        } else
-        if (last.y > screenHeight && direction == "down"){
-          for (i=0; i<snake.length; i++) {
-              snake[i].y = (-i) * polygon
-          }
-          ySnake = first.y
-        }*/
-
-
-        //detectColision();
     }
 
     function keyPush(evt) {
