@@ -23,10 +23,13 @@ class Screen {
     this.context.fillStyle="lime";
     for (let i =0; i<snake.positions.length; i++) {
       this.context.fillRect(
-        (snake.positions[i].horizontal - 1) * this.squareSize, // minus one because of snake logic begins from 1
-        (snake.positions[i].vertical -1) * this.squareSize,
-        this.squareSize,
-        this.squareSize
+        // minus one because of snake logic begins from 1,
+        // and plus one to make a border line
+        (snake.positions[i].horizontal - 1) * this.squareSize  + 1,
+        (snake.positions[i].vertical -1) * this.squareSize + 1,
+        // minus one to centralize the green square on the black square
+        this.squareSize -1,
+        this.squareSize -1
       );
     }
 
