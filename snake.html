@@ -1,5 +1,6 @@
 
 <canvas id="gc"></canvas>
+<link rel="stylesheet" type="text/css" href="style.css">
 <script src="util.js"></script>
 <script src="counter.js"></script>
 <script src="apple.js"></script>
@@ -13,14 +14,14 @@
   var gameOver = false;
 
   window.onload=function() {
-    let squares =  20; // number of squares on the grid
-    let squareSize = 20; // square size in pixel
+    let squares =  40; // number of squares on the grid (horizontal)
     let snakeTail = 6; // snake tail size
     let pointsPerApple = 10; // points for each apple ate
 
-    screen = new Screen(squares, squareSize);
-    snake = new Snake(snakeTail, squares);
-    apple = new Apple(squares);
+    screen = new Screen(squares);
+    snake = new Snake(snakeTail, screen.verticalSquares,
+      screen.horizontalSquares);
+    apple = new Apple(screen.verticalSquares, screen.horizontalSquares);
     counter = new Counter(pointsPerApple);
 
     sortApple();

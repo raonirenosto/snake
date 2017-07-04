@@ -1,10 +1,18 @@
 class Screen {
-  constructor(squares, squareSize, context) {
+  constructor(squares) {
+    this.windowWidth = window.innerWidth;
+    this.windowHeight = window.innerHeight;
     this.counterBoxHeight = 50;
-    this.height = (squares * squareSize) + this.counterBoxHeight;
-    this.width = (squares * squareSize);
-    this.squares = squares;
-    this.squareSize = squareSize;
+
+    // square size in pixels
+    this.squareSize = Math.trunc(this.windowWidth / squares)
+
+    this.horizontalSquares = squares;
+    this.verticalSquares = Math.trunc((this.windowHeight - this.counterBoxHeight)
+    / this.squareSize);
+
+    this.width = this.squareSize * this.horizontalSquares
+    this.height = (this.squareSize * this.verticalSquares) + this.counterBoxHeight
 
     this.context = this.context;
     this.canv=document.getElementById("gc");
@@ -47,7 +55,7 @@ class Screen {
   }
 
   drawCounter(counter) {
-    let verticalCounterPosition = this.squares * this.squareSize;
+    let verticalCounterPosition = this.verticalSquares * this.squareSize;
 
     // print black bottom
     this.context.fillStyle="grey";

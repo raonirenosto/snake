@@ -1,8 +1,9 @@
 class Snake {
-  constructor(snakeTail, squares) {
+  constructor(snakeTail, verticalSquares, horizontalSquares) {
     this.tail = snakeTail;
     this.trail = [];
-    this.squares = squares;
+    this.verticalSquares = verticalSquares;
+    this.horizontalSquares = horizontalSquares;
     this.vertical = 0;
     this.horizontal = -1; // start going left
     this.buildTail();
@@ -10,12 +11,13 @@ class Snake {
 
   buildTail() {
     // start in the middle of screen
-    let middleOfScreen = this.squares / 2;
+    let middleOfScreenVertical = this.verticalSquares / 2;
+    let middleOfScreenHorizontal = this.horizontalSquares / 2;
 
     for (let i=0; i<this.tail; i++) {
       this.trail.push({
-        vertical: middleOfScreen,
-        horizontal: middleOfScreen + i
+        vertical: middleOfScreenVertical,
+        horizontal: middleOfScreenHorizontal + i
       })
     }
   }
@@ -37,20 +39,20 @@ class Snake {
     for (let i=0; i<this.trail.length; i++) {
       // when snake overlap the left edge
       if (this.trail[i].horizontal < 1) {
-        this.trail[i].horizontal = this.squares;
+        this.trail[i].horizontal = this.horizontalSquares;
       }
       // when snake overlap the right edge
-      if (this.trail[i].horizontal > this.squares) {
+      if (this.trail[i].horizontal > this.horizontalSquares) {
         this.trail[i].horizontal = 1;
       }
 
       // when snake overlap the top edge
       if (this.trail[i].vertical < 1) {
-        this.trail[i].vertical = this.squares;
+        this.trail[i].vertical = this.verticalSquares;
       }
 
       // when snake overlap the bottom edge
-      if (this.trail[i].vertical > this.squares) {
+      if (this.trail[i].vertical > this.verticalSquares) {
         this.trail[i].vertical = 1;
       }
     }
