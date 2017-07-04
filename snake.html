@@ -1,6 +1,7 @@
 
 <canvas id="gc"></canvas>
 <script src="util.js"></script>
+<script src="counter.js"></script>
 <script src="apple.js"></script>
 <script src="snake.js"></script>
 <script src="screen.js"></script>
@@ -8,16 +9,18 @@
 <script>
   var screen;
   var snake;
+  var counter;
   var gameOver = false;
 
   window.onload=function() {
     let squares =  20; // number of squares on the grid
     let squareSize = 20; // square size in pixel
-    let snakeTail = 13; // snake tail size
+    let snakeTail = 6; // snake tail size
 
     screen = new Screen(squares, squareSize);
     snake = new Snake(snakeTail, squares);
     apple = new Apple(squares);
+    counter = new Counter();
 
     sortApple();
     setInterval(draw,1000/15);
@@ -36,10 +39,11 @@
 
       if (snake.ateApple(apple)) {
         snake.growTail();
+        counter.plusOne();
         sortApple();
       }
 
-      screen.draw(snake, apple);
+      screen.draw(snake, apple, counter);
     }
   }
 
