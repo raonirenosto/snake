@@ -1,9 +1,11 @@
 class Screen {
   constructor(squares, squareSize, context) {
-    this.height = squares * squareSize;
-    this.width = this.height;
+    this.counterBoxHeight = 50;
+    this.height = (squares * squareSize) + this.counterBoxHeight;
+    this.width = (squares * squareSize);
     this.squares = squares;
     this.squareSize = squareSize;
+
     this.context = this.context;
     this.canv=document.getElementById("gc");
     this.context=this.canv.getContext("2d");
@@ -14,10 +16,10 @@ class Screen {
 
   drawnBackground() {
     this.context.fillStyle="black";
-    this.context.fillRect(0,0,this.height,this.width);
+    this.context.fillRect(0,0,this.width, this.height);
   }
 
-  draw(snake, apple) {
+  draw(snake, apple, counter) {
     this.drawnBackground();
 
     this.context.fillStyle="lime";
@@ -40,5 +42,30 @@ class Screen {
       this.squareSize,
       this.squareSize
     );
+
+    this.drawCounter(counter);
+  }
+
+  drawCounter(counter) {
+    let verticalCounterPosition = this.squares * this.squareSize;
+
+    // print black bottom
+    this.context.fillStyle="grey";
+    this.context.fillRect(
+       1,
+       verticalCounterPosition + 1,
+       this.width - 2,
+       this.counterBoxHeight - 2);
+
+    this.context.fillStyle="white";
+    this.context.font = "30px Arial";
+
+    // centralize text on vertical
+    let textPosition = verticalCounterPosition + 40
+    this.context.fillText("Points:",10,textPosition);
+
+    this.context.fillStyle="orange";
+    this.context.font = "30px Arial";
+    this.context.fillText(counter.value(),110,textPosition);
   }
 }

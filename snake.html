@@ -16,11 +16,12 @@
     let squares =  20; // number of squares on the grid
     let squareSize = 20; // square size in pixel
     let snakeTail = 6; // snake tail size
+    let pointsPerApple = 10; // points for each apple ate
 
     screen = new Screen(squares, squareSize);
     snake = new Snake(snakeTail, squares);
     apple = new Apple(squares);
-    counter = new Counter();
+    counter = new Counter(pointsPerApple);
 
     sortApple();
     setInterval(draw,1000/15);
