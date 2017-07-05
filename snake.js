@@ -11,8 +11,8 @@ class Snake {
 
   buildTail() {
     // start in the middle of screen
-    let middleOfScreenVertical = this.verticalSquares / 2;
-    let middleOfScreenHorizontal = this.horizontalSquares / 2;
+    let middleOfScreenVertical = Math.trunc(this.verticalSquares / 2);
+    let middleOfScreenHorizontal = Math.trunc(this.horizontalSquares / 2);
 
     for (let i=0; i<this.tail; i++) {
       this.trail.push({
