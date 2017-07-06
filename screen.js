@@ -1,3 +1,4 @@
+
 class Screen {
   constructor(squares) {
     this.windowWidth = window.innerWidth;
@@ -30,6 +31,14 @@ class Screen {
   draw(snake, apple, counter) {
     this.drawnBackground();
 
+    this.drawSnake();
+
+    this.drawApple();
+
+    this.drawCounter(counter);
+  }
+
+  drawSnake() {
     this.context.fillStyle="lime";
     for (let i =0; i<snake.positions.length; i++) {
       this.context.fillRect(
@@ -42,7 +51,9 @@ class Screen {
         this.squareSize -1
       );
     }
+  }
 
+  drawApple() {
     this.context.fillStyle="red";
     this.context.fillRect(
       (apple.position.horizontal - 1) * this.squareSize, // minus one because of apple logic begins from 1
@@ -50,8 +61,6 @@ class Screen {
       this.squareSize,
       this.squareSize
     );
-
-    this.drawCounter(counter);
   }
 
   drawCounter(counter) {
@@ -75,5 +84,15 @@ class Screen {
     this.context.fillStyle="orange";
     this.context.font = "30px Arial";
     this.context.fillText(counter.value(),110,textPosition);
+  }
+
+  blinkSnakeHead(snake) {
+    this.context.fillStyle=(this.context.fillStyle == "#ffa500")?"lime":"orange";
+    this.context.fillRect(
+      (snake.positions[0].horizontal - 1) * this.squareSize  + 1,
+      (snake.positions[0].vertical -1) * this.squareSize + 1,
+      this.squareSize -1,
+      this.squareSize -1
+    );
   }
 }

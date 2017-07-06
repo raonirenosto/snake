@@ -11,9 +11,11 @@
   var screen;
   var snake;
   var counter;
-  var gameOver = false;
+  var interval;
 
-  window.onload=function() {
+  window.onload=startGame;
+
+  function startGame() {
     let squares =  40; // number of squares on the grid (horizontal)
     let snakeTail = 6; // snake tail size
     let pointsPerApple = 10; // points for each apple ate
@@ -25,28 +27,39 @@
     counter = new Counter(pointsPerApple);
 
     sortApple();
-    setInterval(draw,1000/15);
+    interval = setInterval(draw,1000/15);
 
     document.addEventListener("keydown",keyPush);
   }
 
   function draw() {
-    if (!gameOver) {
-      snake.crawl();
+    snake.crawl();
 
-      if (snake.ateOwnTail()) {
-        gameOver=true;
-        return;
-      }
-
-      if (snake.ateApple(apple)) {
-        snake.growTail();
-        counter.plusOne();
-        sortApple();
-      }
-
-      screen.draw(snake, apple, counter);
+    if (snake.ateOwnTail()) {
+      gameOver();
     }
+
+    if (snake.ateApple(apple)) {
+      snake.growTail();
+      counter.plusOne();
+      sortApple();
+    }
+
+    screen.draw(snake, apple, counter);
+  }
+
+  function gameOver() {
+    clearInterval(interval);
+
+    interval = setInterval(()=>screen.blinkSnakeHead(snake), 200);
+
+    onAnyKeyPress = function onKeyPress() {
+      clearInterval(interval);
+      document.removeEventListener('keydown', onKeyPress);
+      startGame();
+    }
+
+    document.addEventListener("keydown", onAnyKeyPress);
   }
 
   function sortApple() {
